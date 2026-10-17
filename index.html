@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Viewtube</title>
+<style>
+:root{--bg:#0f0f0f;--surf:#272727;--surf2:#3f3f3f;--text:#fff;--sub:#aaa;--line:#303030;--p:#9b30ff}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+body{background:var(--bg);color:var(--text);font-family:Roboto,Arial,sans-serif;max-width:480px;margin:0 auto;min-height:100vh;padding-bottom:64px}
+svg{fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.top{display:flex;align-items:center;height:56px;padding:0 4px 0 12px}
+.logo{display:flex;align-items:center;gap:6px;font-weight:700;font-size:19px;letter-spacing:-.6px}
+.logo i{width:34px;height:24px;background:var(--p);border-radius:7px;position:relative;display:block}
+.logo i:after{content:"";position:absolute;left:14px;top:6px;border-left:11px solid #fff;border-top:6px solid transparent;border-bottom:6px solid transparent}
+.sp{flex:1}
+.ib{width:48px;height:48px;display:flex;align-items:center;justify-content:center;color:var(--text)}
+.ib svg{width:24px;height:24px}
+.chips{display:flex;gap:8px;padding:0 12px 8px;overflow-x:auto;scrollbar-width:none}
+.chip{flex:none;background:var(--surf);border-radius:8px;padding:6px 12px;font-size:14px;font-weight:500;line-height:20px}
+.chip.on{background:var(--text);color:var(--bg)}
+.chip svg{width:20px;height:20px;display:block}
+.card{padding-bottom:16px}
+.th{position:relative;aspect-ratio:16/9;background:linear-gradient(135deg,#2b2b3a,#1a1a22)}
+.dur{position:absolute;right:4px;bottom:4px;background:#000c;border-radius:4px;padding:2px 4px;font-size:12px;font-weight:500}
+.prog{position:absolute;left:0;bottom:0;height:3px;background:var(--p)}
+.meta{display:flex;padding:12px 4px 0 12px;gap:12px}
+.av{flex:none;width:36px;height:36px;border-radius:50%;background:var(--p);display:flex;align-items:center;justify-content:center;font-weight:700}
+.tt{font-size:16px;font-weight:500;line-height:21px;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.sub{color:var(--sub);font-size:12px;margin-top:2px}
+.mv{flex:none;width:32px;height:32px;color:var(--text)}
+.mv svg{width:20px;height:20px;margin:6px}
+.shelf h3{display:flex;align-items:center;gap:8px;font-size:20px;padding:8px 16px}
+.shelf h3 svg{width:26px;height:26px;color:var(--p)}
+.row{display:flex;gap:8px;padding:0 12px;overflow-x:auto;scrollbar-width:none}
+.sc{flex:none;width:150px;aspect-ratio:9/16;border-radius:12px;position:relative;background:linear-gradient(160deg,#3a2b4a,#1a1a22);overflow:hidden}
+.sc:after{content:"";position:absolute;inset:auto 0 0 0;height:96px;background:linear-gradient(transparent,#000b)}
+.sc div{position:absolute;left:10px;right:10px;bottom:10px;z-index:1}
+.sc b{display:block;font-size:14px;font-weight:600;line-height:18px}
+.sc span{font-size:12px;color:#e6e6e6}
+nav{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:100%;max-width:480px;height:56px;background:var(--bg);display:flex}
+nav a{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:10px;gap:2px}
+nav a svg{width:25px;height:25px}
+nav a.plus svg{width:38px;height:38px;stroke-width:1.4}
+nav a.on{font-weight:700}
+nav .me{width:26px;height:26px;border-radius:50%;background:#5c6bc0;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
+nav a.on .me{outline:1.5px solid #fff;outline-offset:1px}
+.page{display:none}.page.on{display:block}
+h2.you{font-size:24px;padding:0 16px}
+.yh{display:flex;align-items:center;gap:16px;padding:8px 16px}
+.yh .av{width:72px;height:72px;font-size:30px}
+.yr{display:flex;align-items:center;gap:18px;padding:14px 16px;font-size:16px}
+.yr svg{width:26px;height:26px}
+.watch{position:fixed;inset:0;background:var(--bg);z-index:9;display:none;max-width:480px;margin:0 auto;overflow:auto}
+.watch.on{display:block}
+.player{aspect-ratio:16/9;background:#000;position:relative}
+.wt{font-size:18px;font-weight:500;line-height:24px;padding:10px 12px 0}
+.wm{font-size:12px;font-weight:500;color:var(--sub);padding:4px 12px}
+.ch{display:flex;align-items:center;gap:10px;padding:10px 12px}
+.ch .n{flex:1;font-size:14px;font-weight:500}
+.btn{background:#fff;color:#000;border-radius:18px;padding:8px 14px;font-size:14px;font-weight:500}
+.pills{display:flex;gap:8px;padding:0 12px;overflow-x:auto;scrollbar-width:none}
+.pill{flex:none;background:var(--surf);border-radius:18px;padding:8px 14px;font-size:14px;font-weight:500}
+.card.rel .th{margin:0}
+</style>
+</head>
+<body>
+<div id="home" class="page on">
+ <div class="top"><div class="logo"><i></i>Viewtube</div><div class="sp"></div>
+  <div class="ib"><svg viewBox="0 0 24 24"><path d="M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6"/><path d="M2 12a9 9 0 0 1 8 8M2 16a5 5 0 0 1 4 4M2 20h.01"/></svg></div>
+  <div class="ib"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div></div>
+ <div class="chips"><div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m15.5 8.5-2 5-5 2 2-5z"/></svg></div>
+  <div class="chip on">All</div><div class="chip">Unwatched</div><div class="chip">In progress</div><div class="chip">Shorts</div><div class="chip">Posts</div><div class="chip">Camera</div><div class="chip">Downloads</div></div>
+ <div id="feed"></div>
+ <div class="shelf"><h3><svg viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="5"/><path d="m10 8.5 5 3.5-5 3.5z"/></svg>Shorts</h3>
+  <div class="row" id="shorts"></div></div>
+ <div id="feed2"></div>
+</div>
+
+<div id="shortspage" class="page"><div class="top"><div class="logo"><i></i></div></div>
+ <div style="aspect-ratio:9/16;background:linear-gradient(160deg,#3a2b4a,#101014);margin:0 12px;border-radius:12px;position:relative"><div style="position:absolute;left:14px;bottom:24px"><b style="font-size:14px">Camera</b><div style="font-size:14px;margin-top:6px">Sample short</div></div></div></div>
+
+<div id="you" class="page">
+ <div class="top"><div class="logo"><i></i>Viewtube</div><div class="sp"></div>
+  <div class="ib"><svg viewBox="0 0 24 24"><path d="M2 8V6a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-6"/><path d="M2 12a9 9 0 0 1 8 8M2 16a5 5 0 0 1 4 4M2 20h.01"/></svg></div>
+  <div class="ib"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg></div>
+  <div class="ib"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19 12a7 7 0 0 0-.1-1.2l2-1.5-2-3.4-2.3 1a7 7 0 0 0-2-1.2L14 3h-4l-.6 2.7a7 7 0 0 0-2 1.2l-2.3-1-2 3.4 2 1.5A7 7 0 0 0 5 12c0 .4 0 .8.1 1.2l-2 1.5 2 3.4 2.300-1a7 7 0 0 0 2 1.200L10 21h4l.6-2.700a7 7 0 0 0 2-1.200l2.300 1 2-3.400-2-1.500c.1-.4.100-.8.100-1.200z"/></svg></div></div>
+ <div class="yh"><div class="av">V</div><div><div style="font-size:24px;font-weight:700">Viewtube</div><div class="sub" style="font-size:13px">128 videos on your device</div></div></div>
+ <div class="yr">History</div><div class="yr">Playlists</div><div class="yr">Hearts</div><div class="yr">Watch later</div><div class="yr">Folders</div><div class="yr">Generated transcripts</div><div class="yr">Refresh library</div><div class="yr">Settings</div>
+</div>
+
+<div id="watch" class="watch">
+ <div class="player"></div>
+ <div class="wt" id="wt"></div>
+ <div class="wm">12 views  3 days ago  ...more</div>
+ <div class="ch"><div class="av" style="width:36px;height:36px">C</div><div class="n">Camera<div class="sub">24 videos</div></div><div class="btn">Subscribe</div></div>
+ <div class="pills"><div class="pill">Heart</div><div class="pill">Save</div><div class="pill">Playlist</div><div class="pill">Share</div><div class="pill">Captions</div><div class="pill">1x</div><div class="pill">Sleep</div><div class="pill">Loop</div><div class="pill">PiP</div><div class="pill">Details</div></div>
+ <div class="ch" style="margin-top:8px"><div style="flex:1;font-size:17px;font-weight:700">Up next</div><div class="sub">Autoplay</div></div>
+ <div id="rel"></div>
+</div>
+
+<nav>
+ <a class="on" data-t="home"><svg viewBox="0 0 24 24" style="fill:currentColor"><path d="M12 3 3 10v11h6v-7h6v7h6V10z"/></svg>Home</a>
+ <a data-t="shortspage"><svg viewBox="0 0 24 24"><rect x="5" y="3" width="14" height="18" rx="4"/><path d="m10 9 5 3-5 3z"/></svg>Shorts</a>
+ <a class="plus"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 7v10M7 12h10"/></svg></a>
+ <a data-t="home"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M6 4h12M9 11l5 3-5 3z"/></svg>Subscriptions</a>
+ <a data-t="you"><div class="me">V</div>You</a>
+</nav>
+<script>
+var T=["Trip to the mountains","Birthday party 2026","Family dinner","Football match","Summer drive","Old recordings","Weekend walk","Cooking test"];
+function card(i,w){var t=T[i%T.length];return '<div class="card" onclick="openW(\''+t+'\')"><div class="th"><span class="dur">'+(4+i)+':2'+i+'</span>'+(i%3==0?'<div class="prog" style="width:'+(20+i*9)+'%"></div>':'')+'</div><div class="meta"><div class="av">'+"CDFMNOPS"[i%8]+'</div><div style="flex:1;min-width:0"><div class="tt">'+t+'</div><div class="sub">Camera \u2022 '+(i*3+2)+' views \u2022 '+(i+1)+' days ago</div></div><div class="mv"><svg viewBox="0 0 24 24" style="fill:currentColor;stroke:none"><circle cx="12" cy="5" r="1.8"/><circle cx="12" cy="12" r="1.8"/><circle cx="12" cy="19" r="1.8"/></svg></div></div></div>'}
+function fill(id,a,b){var h='';for(var i=a;i<b;i++)h+=card(i);document.getElementById(id).innerHTML=h}
+fill('feed',0,3);fill('feed2',3,7);fill('rel',2,8);
+var s='';for(var i=0;i<6;i++)s+='<div class="sc"><div><b>'+T[i]+'</b><span>'+(i*4+3)+' views</span></div></div>';
+document.getElementById('shorts').innerHTML=s;
+function openW(t){document.getElementById('wt').textContent=t;var w=document.getElementById('watch');w.classList.add('on');w.scrollTop=0}
+document.querySelectorAll('nav a[data-t]').forEach(function(a){a.onclick=function(){
+ document.getElementById('watch').classList.remove('on');
+ document.querySelectorAll('.page').forEach(function(p){p.classList.remove('on')});
+ document.getElementById(a.dataset.t).classList.add('on');
+ document.querySelectorAll('nav a').forEach(function(x){x.classList.remove('on')});a.classList.add('on')}});
+</script>
+</body>
+</html>
